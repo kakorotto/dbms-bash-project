@@ -1,0 +1,12 @@
+#!/bin/bash
+  # echo -e "Enter Database Name: \c"
+  read -p "Enter Database Name: " dbname
+  cd ./DB/$dbname 2>/dev/null
+  if [[ $? == 0 ]]; then
+    echo "Database $dbname was Successfully Selected"
+    bash ../../tabsmenu
+  else
+    echo "Database $dbname wasn't found"
+    bash ../../main
+  fi
+bash main

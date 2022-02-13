@@ -1,0 +1,11 @@
+#!/bin/bash
+  read -p "Enter Database Name: " dbname
+  mkdir ./DB/$dbname 2>> /dev/null
+  if [[ $? == 0 ]]
+  then
+    echo "Database Created Successfully"
+    bash main
+  else
+    echo "Error Creating Database $dbname"
+    bash main
+  fi

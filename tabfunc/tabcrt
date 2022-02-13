@@ -1,0 +1,64 @@
+#!/bin/bash
+echo tablecreate
+pwd
+  read -p "Table Name: " tabname
+  if [[ -f $tabname ]]; then
+    echo "table already existed ,choose another name"
+    bash ../../tabsmenu
+  fi
+  read  -p "Number of Columns: " colnum
+  i=1
+  sep=":"
+  rowsep="\n"
+  pk=""
+  metaData="Field"$sep"Type"$sep"key"
+  while [ $i -le $colnum ]
+  do
+    read -p "Name of column No $i: " colname
+    echo "Type of column $colname: "
+    select typeselector in "int" "str"
+    do
+      case $REPLY in
+        1) coltype="int";break;;
+        2) coltype="str";break;;
+        * ) echo -e "\n\t\tWrong! \n\ttry again\n" ;;
+      esac
+    done
+    if [[ $pk == "" ]]; then
+      echo 'Make PK?'
+      select pkselector in "yes" "no"
+      do
+        case $REPLY in
+          1) pk="PK";
+          metaData+=$rowsep$colname$sep$coltype$sep$pk;
+          break;;
+          2)
+          metaData+=$rowsep$colname$sep$coltype$sep""
+          break;;
+          *) echo -e "\n\t\tWrong! \n\ttry again\n" ;;
+        esac
+      done
+    else
+      metaData+=$rowsep$colname$sep$coltype$sep""
+    fi
+    if [[ $i == $colnum ]]; then
+      temp=$temp$colname
+    else
+      if [[ $i -eq $colnum ]]; then
+      temp=$temp$colname
+      else
+      temp=$temp$colname$sep
+      fi
+    fi
+    ((i++))
+  done
+  touch .$tabname.meta
+  echo -e $metaData  >> .$tabname.meta
+  touch $tabname
+  echo -e $temp >> $tabname
+  if [[ $? == 0 ]]
+  then
+    echo "Table created successfully"
+  else
+    echo "Error creating table $tabname"
+  fi

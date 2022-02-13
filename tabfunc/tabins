@@ -1,0 +1,50 @@
+#!/bin/bash
+  read -p "Table Name: " tabname
+  if ! [[ -f $tabname ]]; then
+    echo "Table $tabname isn't existed ,choose another table"
+    tablesMenu
+  fi
+  colnum=`awk 'END{print NR}' .$tabname.meta`
+  sep=":"
+  rowsep="\n"
+  for (( i = 2; i <= $colnum; i++ )); do
+    colname=$(awk 'BEGIN{FS=":"}{ if(NR=='$i') print $1}' .$tabname.meta)
+    coltype=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $2}' .$tabname.meta)
+    colKey=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $3}' .$tabname.meta)
+    read -p "$colname ($coltype) = " data
+
+
+    if [[ $coltype == "int" ]]; then
+      while ! [[ $data =~ ^[0-9]*$ ]]; do
+        echo -e "invalid DataType !!"
+        echo -e "$colname ($coltype) = \c"
+        read data
+      done
+    fi
+
+    if [[ $colKey == "PK" ]]; then
+      while [[ true ]]; do
+        if [[ $data =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $tabname`]$ ]]; then
+          echo -e "invalid input for Primary Key !!"
+        else
+          break;
+        fi
+        echo -e "$colname ($coltype) = \c"
+        read data
+      done
+    fi
+
+    if [[ $i == $colnum ]]; then
+      row=$row$data$rowsep
+    else
+      row=$row$data$sep
+    fi
+  done
+  echo -e $row"\c" >> $tabname
+  if [[ $? == 0 ]]
+  then
+    echo "Data Inserted Successfully"
+  else
+    echo "Error Inserting Data into Table $tabname"
+  fi
+  row=""
