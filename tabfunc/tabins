@@ -1,9 +1,11 @@
 #!/bin/bash
   read -p "Table Name: " tabname
-  if ! [[ -f $tabname ]]; then
+  if [ -z $tabname ] ;then 
+    echo "please enter table name"
+  elif ! [[ -f $tabname ]]; then
     echo "Table $tabname isn't existed ,choose another table"
-    tablesMenu
-  fi
+  
+  else
   colnum=`awk 'END{print NR}' .$tabname.meta`
   sep=":"
   rowsep="\n"
@@ -48,3 +50,5 @@
     echo "Error Inserting Data into Table $tabname"
   fi
   row=""
+
+  fi

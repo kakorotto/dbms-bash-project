@@ -13,7 +13,7 @@ do
     6) bash ../../tabfunc/tabdel ;bash ../../tabsmenu ;;
     7) bash ../../tabfunc/tabupd ;bash ../../tabsmenu ;;
     8) cd ../../ ; bash main ;;
-    9) exit ;;
+    9) exit ; break;;
     *) echo "\n\t\tWrong! \n\ttry again\n" ; tabsmenu;
   esac
 done
