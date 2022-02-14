@@ -1,5 +1,8 @@
 #!/bin/bash
   read -p "Enter Database Name: " dbname
+  if [ -z $dbname ] ;then 
+    echo "please Database name"
+  else
   mkdir ./DB/$dbname 2>> /dev/null
   if [[ $? == 0 ]]
   then
@@ -8,4 +11,5 @@
   else
     echo "Error Creating Database $dbname"
     bash main
+  fi
   fi

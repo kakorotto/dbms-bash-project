@@ -2,10 +2,11 @@
 echo tablecreate
 pwd
   read -p "Table Name: " tabname
-  if [[ -f $tabname ]]; then
+  if [ -z $tabname ] ;then 
+    echo "please enter table name"
+  elif [[ -f $tabname ]]; then
     echo "table already existed ,choose another name"
-    bash ../../tabsmenu
-  fi
+  else
   read  -p "Number of Columns: " colnum
   i=1
   sep=":"
@@ -62,3 +63,4 @@ pwd
   else
     echo "Error creating table $tabname"
   fi
+fi
