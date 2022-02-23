@@ -1,7 +1,8 @@
 #!/bin/bash
   read -p "Enter Database Name: " dbname
-  if [ -z $dbname ] ;then 
-    echo "please Database name"
+  if [ -z $dbname ] 
+  then 
+    echo "It is empty input. Please enter Name..."
   else
   mkdir ./DB/$dbname 2>> /dev/null
   if [[ $? == 0 ]]
