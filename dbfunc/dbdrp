@@ -1,9 +1,11 @@
 #!/bin/bash
   read -p "Enter Database Name: " dbname
-  rm -r ./DB/$dbname 2>/dev/null
-  if [[ $? == 0 ]]; then
-    echo "Database Dropped Successfully"
+  
+  if [ -d ./DB/$dbname ]
+	then
+	      rm -r ./DB/$dbname 2> /dev/null
+        echo "Database $dbname Dropped Successfully"
   else
-    echo "Database Not found"
+        echo "Database Not found"
   fi
 bash main
