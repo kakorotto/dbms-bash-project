@@ -4,7 +4,6 @@
      then 
     echo "It is empty input. Please enter Name..."
 
-
   elif [ -d ./DB/$dbname ]
         then
             echo "This Database is already exist"

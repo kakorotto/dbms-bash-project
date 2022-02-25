@@ -1,7 +1,9 @@
 #!/bin/bash
   read -p "Enter Database Name: " dbname
-  
-  if [ -d ./DB/$dbname ]
+  if [ -z $dbname ] 
+     then 
+    echo "It is empty input. Please enter Name..."
+  elif [ -d ./DB/$dbname ]
 	then
 	      rm -r ./DB/$dbname 2> /dev/null
         echo "Database $dbname Dropped Successfully"

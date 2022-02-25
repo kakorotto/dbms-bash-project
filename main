@@ -8,10 +8,10 @@ PS3="Select a choice: "
   select dbselector in "Create Database" "List Database" "Connect Database" "Drop Database" "exit"
 do  
    case $REPLY in
-    1) bash ./dbfunc/dbcr ;;
-    2) bash ./dbfunc/dbls ;;
-    3) bash ./dbfunc/dbcnn ;;
-    4) bash ./dbfunc/dbdrp ;;
+    1) bash ./dbfunc/dbcr ; break;;
+    2) bash ./dbfunc/dbls ; break;;
+    3) bash ./dbfunc/dbcnn ; break;;
+    4) bash ./dbfunc/dbdrp ; break;;
     5) exit ;;
     *) echo -e "\n\t\tWrong! \n\ttry again\n" ; bash main ;;
   esac
