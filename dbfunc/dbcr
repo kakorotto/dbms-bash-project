@@ -1,16 +1,16 @@
 #!/bin/bash
   read -p "Enter Database Name: " dbname
   if [ -z $dbname ] 
-  then 
+     then 
     echo "It is empty input. Please enter Name..."
+
+
+  elif [ -d ./DB/$dbname ]
+        then
+            echo "This Database is already exist"
   else
-  mkdir ./DB/$dbname 2>> /dev/null
-  if [[ $? == 0 ]]
-  then
-    echo "Database Created Successfully"
-    bash main
-  else
-    echo "Error Creating Database $dbname"
-    bash main
+            mkdir ./DB/$dbname
+            echo "Database created successfully!"
+        
   fi
-  fi
+  bash main
