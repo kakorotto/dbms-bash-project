@@ -4,7 +4,7 @@ pwd
   read -p "Table Name: " tabname
   if [ -z $tabname ] ;then 
     echo "please enter table name"
-  elif [[ -f $tabname ]]; then
+  elif [ -f $tabname ]; then
     echo "table already existed ,choose another name"
   else
   read  -p "Number of Columns: " colnum
