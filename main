@@ -12,7 +12,7 @@ do
     2) bash ./dbfunc/dbls ; break;;
     3) bash ./dbfunc/dbcnn ; break;;
     4) bash ./dbfunc/dbdrp ; break;;
-    5) exit ;;
+    5) exit ; break ;;
     *) echo -e "\n\t\tWrong! \n\ttry again\n" ; bash main ;;
   esac
 done

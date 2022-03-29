@@ -1,6 +1,7 @@
 #!/bin/bash
 
-select col in "Select All Columns of a Table" "Select Specific Column from a Table" "Select From Table under condition" "Back To Tables Menu" "Back To Main Menu" "Exit"
+select col in "Select All Columns of a Table" "Select Specific Column from a Table" "Select Specific Row from a Table" "Back To Tables Menu" "Back To Main Menu" 
+#	"Exit"
 do
   case $REPLY in
     1)  read -p "Enter Table Name: " tabname
@@ -11,10 +12,15 @@ do
     2)  read -p "Enter Table Name: " tabname 
         read -p "Enter Column Number: " colNum
         awk 'BEGIN{FS=":"}{print $'$colNum'}' $tabname ;;
-    3) clear; selectCon ;;
+   # 3) clear; selectCon ;;
+    3) read -p "Enter Table Name: " tabname
+       read -p "Enter Row Number: " rowNum
+       sed "${rowNum}q;d" $tabname;;   
     4) clear; tablesMenu ;;
     5) clear; cd ../.. 2>/dev/null; mainMenu ;;
-    6) exit ;;
+ #   5) exit ;;
     *) echo "\n\t\tWrong! \n\ttry again\n" ; selectMenu;
   esac
 done
+
+# "Select From Table under condition" 

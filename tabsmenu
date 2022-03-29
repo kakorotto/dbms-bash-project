@@ -1,8 +1,9 @@
 #!/bin/bash
 PS3="Select a choice: "
-echo tabmenu
+# echo tabmenu
 pwd
-select tabselector in "Create Table" "List Tables" "Drop Table" "Insert into Table" "Select From Table" "Delete From Table" "Update Table" "Back To Main Menu" "Exit"
+select tabselector in "Create Table" "List Tables" "Drop Table" "Insert into Table" "Select From Table" "Delete From Table" "Update Table" "Back To Main Menu"
+       #	"Exit"
 do 
   case $REPLY in
     1) bash ../../tabfunc/tabcrt ;bash ../../tabsmenu ;;
@@ -12,8 +13,8 @@ do
     5) bash ../../tabfunc/tabsel ;bash ../../tabsmenu ;;
     6) bash ../../tabfunc/tabdel ;bash ../../tabsmenu ;;
     7) bash ../../tabfunc/tabupd ;bash ../../tabsmenu ;;
-    8) cd ../../ ; bash main ;;
-    9) exit ; break;;
-    *) echo "\n\t\tWrong! \n\ttry again\n" ; tabsmenu;
+    8) cd ../../ ; bash ./main ; break;;
+  #  9) exit ; break ;;
+    *) echo -e "\n\t\tWrong! \n\ttry again\n" ;bash ../../tabsmenu;
   esac
 done
